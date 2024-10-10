@@ -41,6 +41,7 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
                 random_file = f"{uuid.uuid4()}.txt"
                 with open(f"{address_to_spreadsheet.parent}/{random_file}", "w") as f:
                     f.write('Test by Aropha to check if the file can be created in this folder.')
+                    f.close()
                 os.remove(f"{address_to_spreadsheet.parent}/{random_file}")
 
             except Exception as e:
@@ -82,6 +83,7 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
         biodeg_data = f"{address_to_spreadsheet.parent}/{address_to_spreadsheet.stem}_biodeg_data_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.gz"
         with open(biodeg_data, 'wb') as f:
             f.write(base64.b64decode(response_content.json()['data']))
+            f.close()
 
         print(f"Data processing completed successfully. You can access the processed data at: `{biodeg_data}`\n")
         print(f"Number of remaining polymer experiment credits: {response_content.json()['polymer_credits']}\n")
@@ -92,6 +94,7 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
         flag_address = f"{address_to_spreadsheet.parent}/{address_to_spreadsheet.stem}_flag_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.gz"
         with open(flag_address, 'wb') as f:
             f.write(base64.b64decode(response_content.json()['data']))
+            f.close()
 
         print(f"Data processing flagged for inconsistencies in row entries. Please review the flagged rows and correct them. The flagged notes can be found at: `{flag_address}`\n")
         print(f"Number of remaining polymer experiment credits: {response_content.json()['polymer_credits']}\n")
