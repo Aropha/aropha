@@ -1,6 +1,7 @@
 import gzip
 import requests
 import base64
+import shutil
 from pathlib import Path
 from datetime import datetime
 
@@ -34,6 +35,14 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
             with open(address_to_spreadsheet, 'rb') as f:
                 raw_data = base64.b64encode(gzip.compress(f.read(), compresslevel = 9)).decode('utf-8')
                 f.close()
+
+            try:
+                with open(f"{address_to_spreadsheet.parent}/test.tmp", "w") as f:
+                    pass
+                shutil.rmtree(f"{address_to_spreadsheet.parent}/test.tmp")
+            except Exception as e:
+                print(f"Can not create files at `{address_to_spreadsheet.parent}`. Please try again later.\n")
+                return None
         
         except Exception as e:
             print(f"An error occurred while reading the file: {str(e)}. Please try again later.\n")
