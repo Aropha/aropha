@@ -1,1 +1,1 @@
-# aropha
+Aropha Inc. is committed to revolutionizing polymer science
