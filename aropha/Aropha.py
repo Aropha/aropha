@@ -1,9 +1,10 @@
 import gzip
 import requests
 import base64
-import shutil
+import os
 from pathlib import Path
 from datetime import datetime
+import uuid
 
 
 def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeout = 3600):
@@ -37,9 +38,11 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
                 f.close()
 
             try:
-                with open(f"{address_to_spreadsheet.parent}/test.tmp", "w") as f:
-                    pass
-                shutil.rmtree(f"{address_to_spreadsheet.parent}/test.tmp")
+                random_file = f"{uuid.uuid4()}.txt"
+                with open(f"{address_to_spreadsheet.parent}/{random_file}", "w") as f:
+                    f.write('Test by Aropha to check if the file can be created in this folder.')
+                os.remove(f"{address_to_spreadsheet.parent}/{random_file}")
+
             except Exception as e:
                 print(f"Can not create files at `{address_to_spreadsheet.parent}`. Please try again later.\n")
                 return None
