@@ -2,9 +2,10 @@ import gzip
 import requests
 import base64
 import os
+import uuid
+import bcrypt
 from pathlib import Path
 from datetime import datetime
-import uuid
 
 
 def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeout = 3600):
@@ -40,8 +41,9 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
             try:
                 random_file = f"{uuid.uuid4()}.txt"
                 with open(f"{address_to_spreadsheet.parent}/{random_file}", "w") as f:
-                    f.write('Test by Aropha to check if the file can be created in this folder.')
+                    f.write('Test file by Aropha to check if the file can be created in this folder.')
                     f.close()
+                
                 os.remove(f"{address_to_spreadsheet.parent}/{random_file}")
 
             except Exception as e:
@@ -60,7 +62,8 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
         raw_data = 'blank'
 
     try:
-        json_data = {'email': email, 'password': password, 'engine': engine, 'raw_data': raw_data}
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        json_data = {'email': email, 'hashed_password': hashed_password, 'engine': engine, 'raw_data': raw_data}
 
         response_content = requests.post(
             url = 'https://test.aropha.com',
