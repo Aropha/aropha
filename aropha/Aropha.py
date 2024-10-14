@@ -104,8 +104,8 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
 
     else:
         try:
-            raise Exception(f"An error occurred during data processing: {response_content.json()['detail']}. Please try again later.\n")
+            print(f"An error occurred during data processing: {response_content.json()['detail']}. Please try again later.\n")
         except:
-            raise Exception(f"Internal error problem.\n")
+            print(f"Internal error problem.\n")
 
     return None
