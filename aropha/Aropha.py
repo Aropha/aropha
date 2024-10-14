@@ -10,7 +10,7 @@ from datetime import datetime
 
 def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeout = 3600):
     """
-    A function that processes a spreadsheet, compresses it, sends it to Aropha's processing server and returns the response.
+    A function for Aropha's inference pipeline that forwards a data entry spreadsheet sends to Aropha's processing servers and returns the response in the `gzip` format.
 
     Parameters:
     - email (str): The email for the Aropha account.
