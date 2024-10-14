@@ -30,33 +30,30 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
             raise FileNotFoundError(f"File not found at {address_to_spreadsheet}. Please check the file path and try again.")
 
         if not (address_to_spreadsheet.suffix.lower().__eq__('.xlsm') or address_to_spreadsheet.suffix.lower().__eq__('.xlsx')):
-            print(f"Invalid file format.\n")
-            return None
+            raise TypeError(f"Invalid file format.\n")
         
         try:
             with open(address_to_spreadsheet, 'rb') as f:
                 raw_data = base64.b64encode(gzip.compress(f.read(), compresslevel = 9)).decode('utf-8')
                 f.close()
 
-            try:
-                random_file = f"{uuid.uuid4()}.txt"
-                with open(f"{address_to_spreadsheet.parent}/{random_file}", "w") as f:
-                    f.write('Test file by Aropha to check if the file can be created in this folder.')
-                    f.close()
-                
-                os.remove(f"{address_to_spreadsheet.parent}/{random_file}")
-
-            except Exception as e:
-                print(f"Can not create files at `{address_to_spreadsheet.parent}`. Please try again later.\n")
-                return None
-        
         except Exception as e:
-            print(f"An error occurred while reading the file: {str(e)}. Please try again later.\n")
-            return None
+            raise Exception(f"An error occurred while reading the file: {str(e)}. Please try again later.\n")
         
         if raw_data.__sizeof__() > 10*1024*1024:
-            print(f"Even after zip compression, your file size exceeds the 10MB limit. Please upload a smaller file./nn")
-            return None
+            raise BufferError(f"Even after zip compression, your file size exceeds the 10MB limit. Please upload a smaller file.\n")      
+
+        try:
+            random_file = f"{uuid.uuid4()}.txt"
+            with open(f"{address_to_spreadsheet.parent}/{random_file}", "w") as f:
+                f.write('Test file by Aropha to check if the file can be created in this folder.')
+                f.close()
+            
+            os.remove(f"{address_to_spreadsheet.parent}/{random_file}")
+
+        except Exception as e:
+            raise PermissionError(f"Can not create files at `{address_to_spreadsheet.parent}`. Please try again later.\n")
+
     else:
         print(f"Spreadsheet file not provided.\n")
         raw_data = 'blank'
@@ -78,8 +75,7 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
         print(status_code)
 
     except Exception as e:
-        print(f"An error occurred during data processing: {str(e)}. Please try again later.\n")
-        return None
+        raise Exception(f"An error occurred during data processing: {str(e)}. Please try again later.\n")
 
     if status_code == 200:
 
@@ -108,8 +104,8 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
 
     else:
         try:
-            print(f"An error occurred during data processing: {response_content.json()['detail']}. Please try again later.\n")
+            raise Exception(f"An error occurred during data processing: {response_content.json()['detail']}. Please try again later.\n")
         except:
-            print(f"Internal error problem.\n")
+            raise Exception(f"Internal error problem.\n")
 
     return None
