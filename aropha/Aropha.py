@@ -44,12 +44,20 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
             raise BufferError(f"Even after zip compression, your file size exceeds the 10MB limit. Please upload a smaller file.\n")      
 
         try:
-            random_file = f"{uuid.uuid4()}.txt"
-            with open(f"{address_to_spreadsheet.parent}/{random_file}", "w") as f:
+
+            counter = 0
+            random_file = Path(f"{address_to_spreadsheet.parent}/{uuid.uuid4()}.txt")
+            while random_file.exists():
+                random_file = Path(f"{address_to_spreadsheet.parent}/{uuid.uuid4()}.txt")
+                counter += 1
+                if counter > 5:
+                    raise PermissionError(f"Can not create files at `{address_to_spreadsheet.parent}`. Please try again later.\n")
+            
+            with open(random_file, "w") as f:
                 f.write('Test file by Aropha to check if the file can be created in this folder.')
                 f.close()
             
-            os.remove(f"{address_to_spreadsheet.parent}/{random_file}")
+            os.remove(random_file)
 
         except Exception as e:
             raise PermissionError(f"Can not create files at `{address_to_spreadsheet.parent}`. Please try again later.\n")
