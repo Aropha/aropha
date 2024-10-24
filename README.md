@@ -9,7 +9,7 @@ At [Aropha](https://www.aropha.com/), we specialize in delivering digital twin s
 This repository, **aropha**, provides an interface to read your in-silico biodegradation experiments from a spreadsheet template, send them to Aropha’s processing servers to run biodegradation simulations, and retrieve the results to your computer. Our service is designed with privacy at its core with zero visibility into your data. We ensure that your data is never stored on hard drives, databases, or any persistent storage — not even temporarily. All computations are performed entirely in RAM, and the results are securely delivered directly to you.
 
 ### Installation
-Aropha's clients can locally install this interface pipeline using the following pip command:
+Aropha's clients can locally install this inference pipeline using the following pip command:
 
 ```
 pip install git+https://github.com/aropha/aropha.git
