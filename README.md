@@ -6,7 +6,7 @@
 At [Aropha](https://www.aropha.com/), we specialize in delivering digital twin solutions with high precision and scalability. Our digital twins specifically designed to simulate the biodegradation processes of macromolecular polymers. For an example of our inference pipeline, explore this [Google Colab](https://colab.research.google.com/drive/1Ypmo0l414TZhx4JTFwuT1bduYs0iRqgw?usp=drive_link) notebook.
 
 ## Overview
-This repository, **aropha**, provides an interface to read your in-silico biodegradation experiments from a spreadsheet template, send them to Aropha’s processing servers to run biodegradation simulations, and retrieve the results to your computer. Our service is designed with privacy at its core, operating with zero visibility into your data. We ensure that your data is never stored on hard drives, databases, or any persistent storage — not even temporarily. All computations are performed entirely in RAM, and the results are securely delivered directly to you.
+This repository, **aropha**, provides an interface to read your in-silico biodegradation experiments from a spreadsheet template, send them to Aropha’s processing servers to run biodegradation simulations, and retrieve the results to your computer. Our service is designed with privacy at its core with zero visibility into your data. We ensure that your data is never stored on hard drives, databases, or any persistent storage — not even temporarily. All computations are performed entirely in RAM, and the results are securely delivered directly to you.
 
 ### Installation
 Aropha's clients can locally install this interface pipeline using the following pip command:
