@@ -3,22 +3,21 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Ypmo0l414TZhx4JTFwuT1bduYs0iRqgw?usp=drive_link)
 <!-- badges: end -->
 
-At [Aropha](https://www.aropha.com/), we specialize in delivering digital twin solutions with high precision and scalability. Our digital twins specifically designed to simulate the biodegradation processes of macromolecular polymers. For an example of our inference pipeline, explore this [Google Colab](https://colab.research.google.com/drive/1Ypmo0l414TZhx4JTFwuT1bduYs0iRqgw?usp=drive_link) notebook.
+At [Aropha](https://www.aropha.com/), we deliver high-precision digital twin solutions that simulate the biodegradation of macromolecular polymers and small molecules with exceptional scalability. For a demonstration, you can explore this [Google Colab notebook](https://colab.research.google.com/drive/1Ypmo0l414TZhx4JTFwuT1bduYs0iRqgw?usp=drive_link) which provides a command-line interface (CLI) to our inference pipelines.
 
 ## Overview
-This repository, **aropha**, provides an interface to read your in-silico biodegradation experiments from a spreadsheet template, send them to Aropha’s processing servers to run biodegradation simulations, and retrieve the results to your computer. Our service is designed with privacy at its core with zero visibility into your data. We ensure that your data is never stored on hard drives, databases, or any persistent storage — not even temporarily. All computations are performed entirely in RAM, and the results are securely delivered directly to you.
+This repository, **aropha**, provides a CLI that connects to Aropha’s simulation inference pipelines. The CLI reads in-silico biodegradation experiment data from a spreadsheet template, submits it to Aropha’s servers for processing, and retrieves the results directly to your computer. Designed with privacy at its core, the pipeline ensures zero visibility into your data: no data is printed, stored on hard drives, or retained on persistent storage — even temporarily. All computations performed entirely in RAM and results are securely delivered back to you.
 
 ### Installation
-Aropha's clients can locally install this inference pipeline using the following pip command:
-
+Aropha clients can install this CLI locally for connecting to our inference pipelines:
 ```
 pip install git+https://github.com/aropha/aropha.git
 ```
 
 ### Current AI engines
-We currently offer the **ArophaBiodegEngine_v1.0**, a comprehensive digital twin solution that can simulate the biodegradation processes of macromolecular polymers as well as small molecules.
+We currently offer the **ArophaBiodegEngine_v1.0**, a comprehensive digital twin solution that simulates the biodegradation of both macromolecular polymers and small molecules.
 
-Our digital twin development team is constantly working to enhance our engines, and we will update this repository as we expand our solutions to address additional biodegradation challenges.
+Our development team continues to advance our AI engines, and updates to this repository will include additional solutions for broader biodegradation challenges.
 
 ### Contact
-To request a copy of the data entry spreadsheet template or for any business inquiries, please reach out to our [business team](https://www.aropha.com/contact.html).
+For a copy of the data entry spreadsheet template or any business inquiries, please contact our [business team](https://www.aropha.com/contact.html).
