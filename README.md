@@ -14,6 +14,20 @@ Aropha clients can install this CLI locally for connecting to our inference pipe
 pip install git+https://github.com/aropha/aropha.git
 ```
 
+### Biodegradation Simulation
+Aropha provides a streamlined spreadsheet template for clients to design their biodegradation experiments. After purchasing simulation credits, clients can use the following command to process their simulations. The retrieved results will be saved automatically in the same folder as the spreadsheet template.
+
+```
+from aropha import Aropha
+
+Aropha(
+    email = 'your_email',
+    password = 'your_password',
+    engine = 'ArophaBiodegEngine_v1.0',
+    address_to_spreadsheet = 'path/to/your/spreadsheet.xlsm'
+)
+```
+
 ### Current AI engines
 We currently offer the **ArophaBiodegEngine_v1.0**, a comprehensive digital twin solution that simulates the biodegradation of both macromolecular polymers and small molecules.
 
