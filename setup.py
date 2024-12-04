@@ -22,7 +22,7 @@ setup(
     packages = find_namespace_packages(include=['aropha', 'aropha.*']),
     include_package_data = False,
     install_requires = [
-        'requests', 'bcrypt'
+        'requests'
     ],
     python_requires = '>=3.8',
     classifiers = [

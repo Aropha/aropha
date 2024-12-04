@@ -3,7 +3,6 @@ import requests
 import base64
 import os
 import uuid
-import bcrypt
 from pathlib import Path
 from datetime import datetime
 
@@ -69,8 +68,7 @@ def Aropha(email, password, address_to_spreadsheet = None, timeout = 3600):
         raw_data = 'blank'
 
     try:
-        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-        json_data = {'email': email, 'hashed_password': hashed_password, 'raw_data': raw_data}
+        json_data = {'email': email, 'password': password, 'raw_data': raw_data}
 
         response_content = requests.post(
             url = 'https://modelserver.aropha.com',
