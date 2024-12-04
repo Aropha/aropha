@@ -3,6 +3,9 @@ __pycache__/
 *.pyc
 *.ini
 
+# Ignore all desktop.ini files in any folder
+**/*.ini
+
 # Ignore virtual environments
 venv/
 env/

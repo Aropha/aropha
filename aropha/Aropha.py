@@ -8,14 +8,13 @@ from pathlib import Path
 from datetime import datetime
 
 
-def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeout = 3600):
+def Aropha(email, password, address_to_spreadsheet = None, timeout = 3600):
     """
-    A function for Aropha's inference pipeline that forwards a data entry spreadsheet sends to Aropha's processing servers and returns the response in the `gzip` format.
+    A function for Aropha's inference pipeline that forwards a data entry spreadsheet to Aropha's processing servers and returns the results in the `gzip` format.
 
     Parameters:
     - email (str): The email for the Aropha account.
     - password (str): The password for the Aropha account.
-    - engine (str): The engine or model to use for processing.
     - address_to_spreadsheet (str): The path to the spreadsheet file.
     - timeout (int): The time in seconds after which the request will time out.
 
@@ -56,11 +55,14 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
             with open(random_file, "w") as f:
                 f.write('Test file by Aropha to check if the file can be created in this folder.')
                 f.close()
-            
-            os.remove(random_file)
-
+        
         except Exception as e:
             raise PermissionError(f"Can not create files at `{address_to_spreadsheet.parent}`. Please try again later.\n")
+
+        try:
+            os.remove(random_file)
+        except:
+            Warning(f"Could not delete the test file `{random_file}` created by Aropha. Please delete the file manually.\n")
 
     else:
         print(f"Spreadsheet file not provided.\n")
@@ -68,10 +70,10 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
 
     try:
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-        json_data = {'email': email, 'hashed_password': hashed_password, 'engine': engine, 'raw_data': raw_data}
+        json_data = {'email': email, 'hashed_password': hashed_password, 'raw_data': raw_data}
 
         response_content = requests.post(
-            url = 'https://test.aropha.com',
+            url = 'https://modelserver.aropha.com',
             headers = {'Content-Type': 'application/json'},
             json = json_data,
             timeout = timeout,
@@ -93,8 +95,9 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
             f.close()
 
         print(f"Data processing completed successfully. You can access the processed data at: `{biodeg_data}`\n")
-        print(f"Number of remaining polymer experiment credits: {response_content.json()['polymer_credits']}\n")
-        print(f"Number of remaining SMILES string experiment credits: {response_content.json()['smiles_string_credits']}\n")
+        print(f"Number of remaining ArophaFormer simulation credits: {response_content.json()['ArophaFormer_credits']}\n")
+        print(f"Number of remaining ArophaGrapher simulation credits: {response_content.json()['ArophaGrapher_credits']}\n")
+        print(f"Number of remaining ArophaPolyFormer simulation credits: {response_content.json()['ArophaPolyFormer_credits']}\n")
 
     elif status_code == 422:
 
@@ -103,16 +106,14 @@ def Aropha(email, password, engine = None, address_to_spreadsheet = None, timeou
             f.write(base64.b64decode(response_content.json()['data']))
             f.close()
 
-        print(f"Data processing flagged for inconsistencies in row entries. Please review the flagged rows and correct them. The flagged notes can be found at: `{flag_address}`\n")
-        print(f"Number of remaining polymer experiment credits: {response_content.json()['polymer_credits']}\n")
-        print(f"Number of remaining SMILES string experiment credits: {response_content.json()['smiles_string_credits']}\n")
+        print(f"{response_content.json()['detail']}. The flagged notes can be found at: `{flag_address}`\n")
 
     elif status_code == 403:
         print(f"{response_content.json()['detail']}\n")
 
     else:
         try:
-            print(f"An error occurred during data processing: {response_content.json()['detail']}. Please try again later.\n")
+            print(f"An error occurred during data processing: {response_content.json()['detail']} Please try again later.\n")
         except:
             print(f"Internal error problem.\n")
 
