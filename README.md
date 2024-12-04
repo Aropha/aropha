@@ -23,7 +23,7 @@ from aropha import Aropha
 Aropha(
     email = 'your_email',
     password = 'your_password',
-    address_to_spreadsheet = 'path/to/your/spreadsheet.xlsm'
+    address_to_spreadsheet = 'path/to/your/spreadsheet.xlsx'
 )
 ```
 
@@ -34,9 +34,9 @@ Our development team continues to advance our AI engines, and updates to this re
 
 | AI Engines        | Version (Release Date) | Chemical Space   | Notes                                    |
 |--------------------|-------------------------|------------------|------------------------------------------|
-| ArophaFormer      | v1.0 (Sep/23/2024)     | Comprehensive    | DP ≤ 100                                 |
-| ArophaGrapher     | v1.0 (Jan/31/2025)     | Comprehensive    | DP ≤ 2000                               |
-| ArophaPolyFormer  | v1.0 (Dec/31/2024)     | Polymer          | No DP limit, can take both SMILES string and monomer units |
+| ArophaFormer      | v1.0 (Sep/23/2024)     | Comprehensive    | `Degree of Polymerization` ≤ 100                                 |
+| ArophaGrapher     | v1.0 (Jan/31/2025)     | Comprehensive    | `Degree of Polymerization` ≤ 2000                               |
+| ArophaPolyFormer  | v1.0 (Dec/31/2024)     | Polymer          | No limit for `Degree of Polymerization`, can take both SMILES string and monomer units |
 
 
 ### Contact
