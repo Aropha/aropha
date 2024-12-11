@@ -80,7 +80,7 @@ def Aropha(email, password, address_to_spreadsheet = None, timeout = 3600):
         )
 
         status_code = response_content.status_code
-        print(status_code)
+        print(f"{status_code}\n")
 
     except Exception as e:
         raise Exception(f"An error occurred during data processing: {str(e)}. Please try again later.\n")
@@ -99,15 +99,17 @@ def Aropha(email, password, address_to_spreadsheet = None, timeout = 3600):
 
     elif status_code == 422:
 
-        flag_address = f"{address_to_spreadsheet.parent}/{address_to_spreadsheet.stem}_flag_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.gz"
-        with open(flag_address, 'wb') as f:
-            f.write(base64.b64decode(response_content.json()['data']))
-            f.close()
-
-        print(f"{response_content.json()['detail']}. The flagged notes can be found at: `{flag_address}`\n")
-
-    elif status_code == 403:
         print(f"{response_content.json()['detail']}\n")
+
+        if 'flag data' in response_content.json().keys():
+        
+            flag_address = f"{address_to_spreadsheet.parent}/{address_to_spreadsheet.stem}_flag_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.gz"
+            
+            print(f"The flag notes can be found at: `{flag_address}`\n")
+
+            with open(flag_address, 'wb') as f:
+                f.write(base64.b64decode(response_content.json()['flag data']))
+                f.close()
 
     else:
         try:
